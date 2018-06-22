@@ -77,5 +77,9 @@ class _FTPURIType(click.ParamType):
               "file should be archived to. This folder must already exist or the move will fail.")
 @click.option("-l", "--load-date", type=_DateType(), help="If provided, must be in the format of YYYY-MM-DD. Defaults "
               "to yesterday.")
-def main():
-    """Include in the help message the fact that it'll fail if there are no files."""
+def main(ftp_conection_string, ftp_file_pattern, fetch_one, archive_folder, load_date):
+    """Download file(s) from FTP and upload directly to Titan's blob storage.
+
+    Include in the help message the fact that it'll fail if there are no files.
+
+    """
