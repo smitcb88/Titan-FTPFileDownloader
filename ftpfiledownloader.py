@@ -201,7 +201,7 @@ class TitanFlowManager(object):
 def main(ftp_connection_string, ftp_file_pattern, fetch_one, archive_folder, load_date):
     """Download file(s) from FTP and upload directly to Titan's blob storage.
 
-    Look for files that match the provided pattern and downloader either the most recent one or all, failing if there
+    Look for files that match the provided pattern and download either the most recent one or all, failing if there
     are no files. For more information, execute the following at the command prompt: ftpfiledownloader --help
 
     """
