@@ -98,7 +98,7 @@ class TitanFlowManager(object):
         self._current_file_name = None
         self._dir_details = None
 
-    def _get_matching_files(self, ftp):
+    def get_matching_files(self, ftp):
         """Return a list of file names (most recent or all determined by fetch_one behaviour) matching the pattern.
 
         Positional Arguments:
@@ -114,7 +114,7 @@ class TitanFlowManager(object):
                               for file_name, details in ftp.mlsd() if self._pattern.match(file_name)}
         except ftplib.error_perm:
             self._dir_details = {}
-            ftp.dir(self._process_dir_output)
+            ftp.dir(self.process_dir_output)
             matching_files = self._dir_details
         if not matching_files:
             raise FTPFileNotFoundError()
@@ -122,7 +122,7 @@ class TitanFlowManager(object):
             return [sorted(matching_files, key=lambda x: matching_files[x], reverse=True)[0]]
         return matching_files
 
-    def _process_dir_output(self, line):
+    def process_dir_output(self, line):
         """Parse the output line from the FTP DIR command and add to self._dir_details {file_name: modified}.
 
         Positional Arguments:
@@ -158,7 +158,7 @@ class TitanFlowManager(object):
             ftp.cwd(archive_path)
             # Forward slash needed before the path to tell the server this is abs, not rel path
             ftp.cwd("/%s" % path)
-            for file_name in self._get_matching_files(ftp):
+            for file_name in self.get_matching_files(ftp):
                 self.logger.info("Uploading file in chunks...")
                 self._current_file_name = file_name
                 ftp.retrbinary("RETR %s" % file_name, self.upload, blocksize=1250000)
