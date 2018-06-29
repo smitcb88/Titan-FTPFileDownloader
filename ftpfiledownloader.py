@@ -179,7 +179,7 @@ class TitanFlowManager(object):
         1. bytes (bytes): the data to upload
 
         """
-        blob_name = self.acquire_program.get_blob_name("{TITAN_DATA_SET_NAME}_{TITAN_LOAD_DATE}_{file_name}",
+        blob_name = self.acquire_program.get_blob_name("{ExecutionDataSetName}_{ExecutionLoadDate}_{file_name}",
                                                        file_name=self._current_file_name)
         self.logger.info("Uploading bytes...")
         self.acquire_program.append_blob_from_bytes(bytes, blob_name=blob_name)
