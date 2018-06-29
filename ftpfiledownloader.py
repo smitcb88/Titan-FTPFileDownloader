@@ -91,7 +91,7 @@ class TitanFlowManager(object):
         self.fetch_one = fetch_one
         self.archive_folder = archive_folder
 
-        from datalake import utilities
+        from titan import utilities
         self.acquire_program = utilities.AcquireProgram()
         self.logger = self.acquire_program.logger
 
