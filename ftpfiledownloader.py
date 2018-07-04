@@ -110,7 +110,7 @@ class TitanFlowManager(object):
         self.logger.info("Searching for matching files...")
         matching_files = None
         try:
-            matching_files = {file_name: details["modified"]
+            matching_files = {file_name: details.get("modified", details.get("modify"))
                               for file_name, details in ftp.mlsd() if self._pattern.match(file_name)}
         except ftplib.error_perm:
             self._dir_details = {}
